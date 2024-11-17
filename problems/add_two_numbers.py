@@ -1,6 +1,6 @@
 # The following is solved horribly since I initially solved it just using lists 
 # and not linked lists. What came after was a hamfisted linked list 
-# transformation of the solution that worked on lists 
+# transformation of the solution that worked on lists . Could redo logic. 
 class Solution(object):
     def addTwoNumbers(self, l1, l2):
         """
