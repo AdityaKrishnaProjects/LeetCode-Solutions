@@ -6,24 +6,18 @@ def canJump(nums):
     :rtype: bool
     """
         
-    current_index = len(nums)-2
     distance_to_goal = 1
 
-    while current_index > 0:
-        if nums[current_index] >= distance_to_goal:
+    for i in range(len(nums)-2, 0, -1):
+        if nums[i] >= distance_to_goal:
             distance_to_goal = 1
-            current_index -= 1
         else:
-            current_index -= 1
             distance_to_goal += 1
 
-    if len(nums) == 1:
+    if len(nums) == 1 or nums[0] >= distance_to_goal:
         return True 
 
-    if nums[0] >= distance_to_goal:
-        return True
-    else:
-        return False
+    return False
 
 print(canJump([2,3,1,1,4]))
 print(canJump([3,2,1,0,4]))
