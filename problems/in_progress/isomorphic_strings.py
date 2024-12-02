@@ -6,26 +6,45 @@ def isIsomorphic(s, t):
     :rtype: bool
     """
 
-    char_num = 0
-    char2_num = 0
     counter = 1
+    char_to_num = {}
+    inv_char_to_num = {}
+    char_to_num2 = {}
+    inv_char_to_num2 = {}
+    length = len(s)
+    curr_index = 0
 
-    a_to_n = {'a': 1, 'c': 3, 'b': 2, 'e': 5, 'd': 4, 'g': 7, 'f': 6, 'i': 9, 
-    'h': 8, 'k': 11, 'j': 10, 'm': 13, 'l': 12, 'o': 15, 'n': 14, 'q': 17, 'p': 16, 
-    's': 19, 'r': 18, 'u': 21, 't': 20, 'w': 23, 'v': 22, 'y': 25, 'x': 24, 'z': 26}
+    while curr_index < length:
+        if s[curr_index] not in inv_char_to_num:
+            char_to_num[counter] = s[curr_index]
+            inv_char_to_num[s[curr_index]] = counter
+            
+            if t[curr_index] in inv_char_to_num2:
+                return False
 
-    for char in s:
-        char_num += a_to_n[char] * counter
-        counter *= 1000
-    
-    counter = 1
+            char_to_num2[counter] = t[curr_index]
+            inv_char_to_num2[t[curr_index]] = counter
 
-    for char in t:
-        char2_num += a_to_n[char] * counter
-        counter *= 1000
+            counter += 1
 
-    print(char_num)
-    print(char2_num)
+        if t[curr_index] not in inv_char_to_num2:
+            char_to_num2[counter] = t[curr_index]
+            inv_char_to_num2[t[curr_index]] = counter
+
+            if s[curr_index] in inv_char_to_num:
+                return False
+            
+            char_to_num[counter] = s[curr_index]
+            inv_char_to_num[s[curr_index]] = counter
+
+            counter += 1
+
+        curr_index += 1
+
+    print(char_to_num)
+    print(char_to_num2)
+
+    return True
 
 print(isIsomorphic("egg","add"))
 print(isIsomorphic("foo", "bar"))
