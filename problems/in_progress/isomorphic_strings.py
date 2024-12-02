@@ -1,4 +1,5 @@
-# do later
+# could be better if I used a two place dict (one key can be associated with 
+# two values)
 def isIsomorphic(s, t):
     """
     :type s: str
@@ -39,6 +40,9 @@ def isIsomorphic(s, t):
 
             counter += 1
 
+        if inv_char_to_num[s[curr_index]] != inv_char_to_num2[t[curr_index]]:
+            return False
+
         curr_index += 1
 
     print(char_to_num)
@@ -52,3 +56,4 @@ print(isIsomorphic("pappeer", "tittlle"))
 print(isIsomorphic("bbbaaaba", "aaabbbba"))
 print(isIsomorphic("baba", "dada"))
 print(isIsomorphic("badc", "baba"))
+print(isIsomorphic("bbbaaaba", "aaabbbba"))
