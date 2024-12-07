@@ -1,27 +1,46 @@
-# Unfinished because I likely need to use dynamic programming to solve this 
-# efficiently
-class Solution(object):
-    def longestPalindrome(self, s):
-        """
-        :type s: str
-        :rtype: str
-        """
-        length = s.len()
+# naive solution (no checking if we have seen an answer before)
+def longestPalindrome(s):
+    """
+    :type s: str (minimum length 1)
+    :rtype: str
+    """
 
-        if length == 1:
-            return s[0]
-        else:
-            while length:
-                for index in range(length-1):
-                    return blah
-                length -= 1
-        
-        return s[0]
+    # normalizes all strings
+    s_norm = ""
+    for char in s:
+        s_norm += char + "|"
+    s_norm = "|" + s_norm
 
-    def isPalindrome(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """
+    # initialize potential longest to 1 (all strings contain one character)
+    longest = [1, s_norm[1]]
 
-        length = s.len()
+    s_norm_len = len(s_norm)
+    index = 1
+    radius = 0
+
+    while index < s_norm_len:
+        while ((index - (radius+1)) > -1) and ((index + (radius+1)) < s_norm_len):
+            # skip dummy values
+            if s_norm[index - (radius+1)] == "|":
+                radius += 1
+                continue
+
+            if s_norm[index - (radius+1)] == s_norm[index + (radius+1)]:
+                radius += 1
+            else:
+                break
+
+        if radius > longest[0]:
+            if (radius % 2) == 0:
+                longest = [radius, s[((index - radius)//2):(((index + radius)//2))]]
+            else:
+                longest = [radius, s[(index//2) - (radius//2):(index//2) + (radius//2) + 1]]
+        radius = 0
+        index += 1
+
+    return longest[1]
+
+print(longestPalindrome("babad"))
+print(longestPalindrome("cbbd"))
+print(longestPalindrome("bbbb"))
+print(longestPalindrome("racecar"))
