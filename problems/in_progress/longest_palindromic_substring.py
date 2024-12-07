@@ -1,4 +1,6 @@
-# naive solution (no checking if we have seen an answer before)
+# naive solution (no checking if we have seen an answer before). Equivalent to 
+# a lot of DP solutions in time comlexity, and better than a lot of them in 
+# space complexity
 def longestPalindrome(s):
     """
     :type s: str (minimum length 1)
