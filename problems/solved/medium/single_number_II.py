@@ -1,4 +1,4 @@
-# very naive solution
+# # very naive solution
 # def singleNumber(nums):
 #     """
 #     :type nums: List[int]
@@ -41,29 +41,36 @@
 
 #     return r_int 
 
-def singleNumber(nums):
-    """
-    :type nums: List[int]
-    :rtype: int
-    """
+# # fast, efficient and readable version of the above code
+# def singleNumber(nums):
+#     """
+#     :type nums: List[int]
+#     :rtype: int
+#     """
     
-    result = 0
-    for i in range(32):
-        mask = 1 << i
-        count = 0
-        for num in nums:
-            if num & mask:
-                count += 1
+#     result = 0
+#     for i in range(32):
+#         # mask sets the bit under consideration
+#         mask = 1 << i
+#         count = 0
+#         for num in nums:
+#             # checks if current bit is 1 in current num
+#             if num & mask:
+#                 count += 1
 
-        if count % 3:
-            if i == 31:
-                result -= mask
-            else:
-                result |= mask
+#         # mod out bit count by 3
+#         if count % 3:
+#             # checks for negative bit
+#             if i == 31:
+#                 # if negative bit make number negative by subtracting 2^31
+#                 result -= mask
+#             else:
+#                 # bitwise or current considered bit
+#                 result ^= mask
 
-    return result
+#     return result
 
-print(singleNumber([2,2,3,2]))
-print(singleNumber([0,1,0,1,0,1,99]))
-print(singleNumber([0,1,0,1,0,1,-99]))
-print(singleNumber([0,-1,0,-1,0,-1,99]))
+# print(singleNumber([2,2,3,2]))
+# print(singleNumber([0,1,0,1,0,1,99]))
+# print(singleNumber([0,1,0,1,0,1,-99]))
+# print(singleNumber([0,-1,0,-1,0,-1,99]))
