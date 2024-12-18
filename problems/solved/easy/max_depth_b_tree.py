@@ -11,10 +11,13 @@ def maxDepth(self, root):
     :rtype: int
     """
 
+    # stops recursion on null 
     if root is None:
         return 0
     
+    # gets depth of right and left
     left_depth = self.maxDepth(root.left)
     right_depth = self.maxDepth(root.right)
     
+    # sets depth of root to 1 + max of next depths
     return 1 + max(left_depth, right_depth)
