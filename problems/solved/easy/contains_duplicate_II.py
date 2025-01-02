@@ -1,3 +1,4 @@
+# decent solution, O(n) time and space complexity
 def containsNearbyDuplicate(nums, k):
     """
     gets list of nums and returns true if 
@@ -7,13 +8,10 @@ def containsNearbyDuplicate(nums, k):
     seen = {}
 
     for i in range(len(nums)):
-        val = nums[i]
-        if val not in seen:
-            seen[val] = i
-        elif (i - seen[val]) > k:
-            seen[val] = i
-        else:
-            return True
+        if nums[i] in seen:
+            if i - seen[nums[i]] <= k:
+                return True
+        seen[nums[i]] = i
 
     return False
 
