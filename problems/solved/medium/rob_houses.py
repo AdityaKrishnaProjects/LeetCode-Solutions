@@ -1,3 +1,6 @@
+# suffix dp, problem is symmetric. Would be exponential in growth if we didn't 
+# cache but because we do each index only has constant computations and we see 
+# each index once so our solution is linear time and space 
 def rob(nums):
     
     N = len(nums)
