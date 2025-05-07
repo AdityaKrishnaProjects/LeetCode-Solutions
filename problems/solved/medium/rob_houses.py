@@ -8,6 +8,9 @@ def rob(nums):
         if index >= N:
             return 0
 
+        if has_cache[index]:
+            return cache[index]
+
         robThis = nums[index] + getMax(index+2)
         dontRobThis = getMax(index+1)
 
