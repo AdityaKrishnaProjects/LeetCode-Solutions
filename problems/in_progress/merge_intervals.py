@@ -11,8 +11,8 @@ def merge(intervals):
 
     for i in range(1, N):
         if sort[i][0] <= right_edge:
-            new_right_edge = max(sort[i][1], r_list[len(r_list)-1][1])
-            r_list[len(r_list)-1][1] = new_right_edge
+            new_right_edge = max(sort[i][1], r_list[-1][1])
+            r_list[-1][1] = new_right_edge
             right_edge = new_right_edge
         else:
             r_list.append(sort[i])
