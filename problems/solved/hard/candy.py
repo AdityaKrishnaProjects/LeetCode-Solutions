@@ -2,7 +2,11 @@
 # neighbors with lower rating. Candies given only grows as a result of runs of 
 # strictly increasing numbers. When the sequence decreases or is equal to the 
 # previous value, candy given can be reset to 1. When two increasing runs meet, 
-# use the max value to ensure that both neighbor conditions are satisfied.
+# use the max value to ensure that both neighbor conditions are satisfied. O(N) 
+# for identifying local minima and plateaus + O(N) for expansion = O(N) overall. 
+# We know expansion takes at most O(2N) as each value will at most be visited 
+# twice (minima and plateau are only visited once as expansion only goes uphill, 
+# peaks can be at most visited twice (if they are the end of two expansions)
 def candy(ratings):
 
     N = len(ratings)
