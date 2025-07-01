@@ -1,4 +1,4 @@
-# fix random pointer logic
+# fix random pointer logic, need to use length and distance to end to determine what current index is for key in created 
 def copyRandomList(head):
     """
     given the head of a linked list where nodes point to next or random
