@@ -13,25 +13,36 @@ def search(nums, target):
     
     N = len(nums)
 
-    l, r = 0, N-1
+    if N == 1:
+        return 0 if nums[0] == target else -1
 
-    while l < r:
+    l, r = 0, N-1
+    pivot = 0
+
+    while l <= r:
         mid = (l + r)//2
 
-        if nums[mid] > nums[mid+1]:
-            pivot = mid
+        if mid < N - 1 and nums[mid] > nums[mid+1]:
+            pivot = mid + 1
             break
-
-        if nums[mid] > nums[0]:
-            l = mid
+        elif nums[mid] >= nums[0]:
+            l = mid + 1
         else:
-            r = mid
+            r = mid - 1
     
-    return pivot
+    l, r = 0, N-1
 
-print(search(,))
-print(search(,))
-print(search(,))
-print(search(,))
-print(search(,))
-print(search(,))
+    while l <= r:
+        mid = (l + r)//2
+        i = (mid + pivot) % N
+
+        if nums[i] == target:
+            return i
+        if nums[i] < target:
+            l = mid + 1
+        else:
+            r = mid - 1
+
+    return -1
+
+print(search([8,9,2,3,4],9))
