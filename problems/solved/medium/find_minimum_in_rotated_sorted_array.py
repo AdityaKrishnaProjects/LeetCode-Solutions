@@ -21,10 +21,10 @@ def findMin(nums):
 
     return nums[l]
 
-# print(findMin([3,4,5,1,2]))
-# print(findMin([4,5,6,7,0,1,2]))
-# print(findMin([1,2,3,4,5,6,7,0]))
-# print(findMin([11,13,15,17]))
+print(findMin([3,4,5,1,2]))
+print(findMin([4,5,6,7,0,1,2]))
+print(findMin([1,2,3,4,5,6,7,0]))
+print(findMin([11,13,15,17]))
 print(findMin([1]))
 print(findMin([2,1]))
 print(findMin([3,1,2]))
