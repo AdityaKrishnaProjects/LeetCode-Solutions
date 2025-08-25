@@ -1,17 +1,23 @@
+# Flatten left and right subtree, recursive call returns tail of subtree. Attach 
+# right node to tail of left subtree, make current right node start of left subtree. 
 def flatten(root):
 
-    if root is None:
-        return root
+    if not root:
+            return None
 
-    res = TreeNode(root.val)
+    def traverse(root):
 
-    def traverse(root, curr):
+        if not root:
+            return None
 
-        if root is None:
-            return
+        left_subtree = traverse(root.left)
+        right_subtree = traverse(root.right)
 
-        curr.right = TreeNode(root.val)
+        if left_subtree:
+            left_subtree.right = root.right
+            root.right = root.left
+            root.left = None
 
-        traverse(root.left, curr.right)
+        return right_subtree or left_subtree or root
 
-        traverse(root.right, curr.right)
+    traverse(root)
