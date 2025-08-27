@@ -3,7 +3,7 @@
 def flatten(root):
 
     if not root:
-            return None
+        return None
 
     def traverse(root):
 
