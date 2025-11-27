@@ -1,5 +1,6 @@
-# need to figure out if starting at each possible start considering length of 
-# word is less efficient than actually sliding the window char by char
+from copy import deepcopy
+
+# Sliding window tilted across all chars of starting word. 
 def findSubstring(s, words):
     
     res = []
@@ -7,48 +8,55 @@ def findSubstring(s, words):
     N = len(s)
     K = len(words)
     step = len(words[0])
+    sat_count = 0
+    sat = {}
 
+    for word in words:
+        if word in sat:
+            sat[word] += 1
+        else:
+            sat[word] = 1
 
-"""
-possible cases for pointers:
+    for n in range(step):
+        i += n
+        j += n + step
 
-(con 1: no current candidate words inside interval)
-    i and j should be equal
+        n_sat = deepcopy(sat)
 
-(valid in con 1, con 2: when j is on border of candidate word)
-    j += step
-        if s[j-step:j] is in dict:
-            if val > 0
-                dict[j-step:j] -= 1
-                sat_count += 1 (con 2)
-                if sat_count == K
-                    res.append(i)
-                    dict[s[i:i+step]] += 1
-                    i += step
-                    sat_count -= 1
-            else:
-                while s[i:i+step] != s[j-step:j]:
-                    dict[s[i:i+step]] += 1
-                    i += step
-                    sat_count -= 1
+        while j <= N:
+            if s[j-step:j] in n_sat:
+                if n_sat[s[j-step:j]] > 0:
+                    n_sat[s[j-step:j]] -= 1
+                    sat_count += 1
+                    if sat_count == K:
+                        res.append(i)
+                        n_sat[s[i:i+step]] += 1
+                        i += step
+                        sat_count -= 1
                 else:
+                    while s[i:i+step] != s[j-step:j]:
+                        n_sat[s[i:i+step]] += 1
+                        i += step
+                        sat_count -= 1
+                    else:
+                        i += step
+            else:
+                while sat_count > 0:
+                    n_sat[s[i:i+step]] += 1
                     i += step
                     sat_count -= 1
-                
-        else
-            while sat_count > 0:
-                dict[s[i:i+step]] += 1
-                i += step
-                sat_count -= 1
-            i = j
+                i = j
 
+            j += step
 
-foo | bar | the | bar | foo |thebarthefoobar
+        i, j = 0, 0
+        sat_count = 0
 
-foo bar the the bar bar
+    return res
 
-foo tan men jin foo bar tan foo foo bar
-
-aba bab aba bab aaa
-"""
-
+# print(findSubstring("barfoothefoobarman", ["foo","bar"]))
+# print(findSubstring("wordgoodgoodgoodbestword", ["word","good","best","word"]))
+# print(findSubstring("barfoofoobarthefoobarman", ["bar","foo","the"]))
+print(findSubstring("foobarthebarfoothebarthefoobar", ["bar","foo","the"]))
+print(findSubstring("footanmenjinfoobartanfoofoobar", ["foo","foo","bar"]))
+print(findSubstring("ababababababaaa", ["aba","bab","aba","bab"]))
